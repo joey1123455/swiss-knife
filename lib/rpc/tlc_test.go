@@ -206,9 +206,9 @@ func TestServerRejectsInvalidCert(t *testing.T) {
 
 	// Use an empty cert pool (invalid)
 	tlsConfig := &tls.Config{
-		InsecureSkipVerify: true, // Force connection even with invalid cert
+		InsecureSkipVerify: false, // Force connection even with invalid cert
 	}
 
 	_, err = tls.Dial("tcp", "localhost:"+port, tlsConfig)
-	require.NoError(t, err, "Expected connection to succeed due to InsecureSkipVerify")
+	require.Error(t, err, "Expected connection to fail due to Incorrect certificate")
 }

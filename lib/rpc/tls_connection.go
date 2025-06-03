@@ -22,7 +22,8 @@ func NewITlsRpcClient(certPath, address, name string) (ITlsRpcClient, error) {
 	}
 
 	tlsConfig := &tls.Config{
-		RootCAs: certPool,
+		RootCAs:            certPool,
+		InsecureSkipVerify: false,
 	}
 
 	logger.Infof("Connecting to TLS RPC server at %s for client %s", address, name)
