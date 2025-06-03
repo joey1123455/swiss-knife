@@ -30,19 +30,14 @@ Swiss Knife is designed to be a versatile and flexible library that can be used 
 * **RPC Support**: Swiss Knife provides support for RPC connections, including client and server implementations.
 
 ## Installation
-------------
-
 To install Swiss Knife, you can use the following command:
 ```bash
 go get github.com/joey1123455/swiss-knife
 ```
 ## Usage
------
-
 Swiss Knife is designed to be easy to use. Here are some examples of how to use the library:
 
 ### Encryption and Decryption
-
 ```go
 package main
 
@@ -75,7 +70,6 @@ func main() {
 ```
 
 ### Logging
-
 ```go
 package main
 
@@ -93,7 +87,6 @@ func main() {
 ```
 
 ### TLS Support
-
 ```go
 package main
 
@@ -117,7 +110,6 @@ func main() {
 ```
 
 ### RPC Support
-
 ```go
 package main
 
@@ -138,21 +130,18 @@ func main() {
 ```
 
 ## API Reference
---------------
-
 Swiss Knife provides a comprehensive API reference that can be found in the [API Reference](https://github.com/joey1123455/swiss-knife/blob/main/API.md) document.
 
 ## License
--------
-
 Swiss Knife is licensed under the MIT License. See the [LICENSE](https://github.com/joey1123455/swiss-knife/blob/main/LICENSE) file for details.
 
 ## Author
-------
-
 Swiss Knife was developed by [zah_gopher](https://github.com/joey1123455).
 
 ## Contributing
-------------
-
 Contributions to Swiss Knife are welcome. If you would like to contribute, please fork the repository and submit a pull request.
+
+please run test using the make command
+```bash
+make tests
+```
