@@ -1,12 +1,7 @@
-
 # Swiss Knife Library
-=====================================
-
 Swiss Knife is a collection of utility functions and libraries for Go programming language. It provides a set of reusable and modular components that can be used to simplify and accelerate development of various applications.
 
 ## Table of Contents
------------------
-
 * [Introduction](#introduction)
 * [Features](#features)
 * [Installation](#installation)
@@ -17,13 +12,9 @@ Swiss Knife is a collection of utility functions and libraries for Go programmin
 * [Contributing](#contributing)
 
 ## Introduction
-------------
-
 Swiss Knife is designed to be a versatile and flexible library that can be used in a wide range of applications, from command-line tools to web applications. It provides a set of utility functions and libraries that can be used to perform various tasks, such as encryption, decryption, logging, and more.
 
 ## Features
---------
-
 * **Encryption and Decryption**: Swiss Knife provides a set of encryption and decryption functions using AES-GCM algorithm.
 * **Logging**: Swiss Knife provides a logging library that can be used to log messages at different levels (debug, info, warn, error, fatal).
 * **TLS Support**: Swiss Knife provides support for TLS connections, including certificate generation and verification.
