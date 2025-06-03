@@ -1,4 +1,4 @@
-# SwissKnife Library
+# Swiss Knife Library
 Swiss knife is just a random bunch of things i noticed i kept on re writting in diffrent projects.
 
 ## Installation
