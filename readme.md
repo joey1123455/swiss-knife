@@ -1,4 +1,4 @@
-# Swiss Knife Library
+# Swiss Knife
 Swiss Knife is a collection of utility functions and libraries for Go programming language. It provides a set of reusable and modular components that can be used to simplify and accelerate development of various applications.
 
 ## Table of Contents
