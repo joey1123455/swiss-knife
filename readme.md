@@ -77,29 +77,6 @@ func main() {
 }
 ```
 
-### TLS Support
-```go
-package main
-
-import (
-	"fmt"
-	"github.com/joey1123455/swiss-knife/lib/rpc/tls_connection"
-)
-
-func main() {
-	certPath := "path/to/cert"
-	keyPath := "path/to/key"
-
-	tlsConn, err := tls_connection.NewTLSConnection(certPath, keyPath)
-	if err != nil {
-		fmt.Println("Error creating TLS connection:", err)
-		return
-	}
-
-	fmt.Println("TLS connection established")
-}
-```
-
 ### RPC Support
 ```go
 package main
