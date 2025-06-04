@@ -12,10 +12,15 @@ import (
 // configuration. The client is named for logging purposes.
 //
 // The returned error is non-nil if the client fails to connect to the server.
-func NewITlsRpcClient(certPath, address, name string) (ITlsRpcClient, error) {
+func NewITlsRpcClient(caCrtPath, clientCrtPath, clientKeyPath, address, name string) (ITlsRpcClient, error) {
 	logger := NewDefaultLogger()
+	cert, err := tls.LoadX509KeyPair(clientCrtPath, clientKeyPath)
+	if err != nil {
+		logger.Errorf("Failed to load TLS certificate and key for client %s: %v", name, err)
+		return nil, fmt.Errorf("failed to load TLS certificate and key: %w", err)
+	}
 
-	certPool, err := loadCertPool(certPath)
+	certPool, err := loadCertPool(caCrtPath)
 	if err != nil {
 		logger.Errorf("Failed to load cert pool for client %s: %v", name, err)
 		return nil, fmt.Errorf("failed to load cert pool: %w", err)
@@ -24,6 +29,7 @@ func NewITlsRpcClient(certPath, address, name string) (ITlsRpcClient, error) {
 	tlsConfig := &tls.Config{
 		RootCAs:            certPool,
 		InsecureSkipVerify: false,
+		Certificates:       []tls.Certificate{cert},
 	}
 
 	logger.Infof("Connecting to TLS RPC server at %s for client %s", address, name)
@@ -49,13 +55,22 @@ func NewITlsRpcClient(certPath, address, name string) (ITlsRpcClient, error) {
 //
 // The returned ITlsRpcServer object is ready to use for RPC registrations and
 // serving.
-func NewITlsRpcServer(certPath, keyPath, port string) (ITlsRpcServer, error) {
+func NewITlsRpcServer(certPath, keyPath, capath, port string) (ITlsRpcServer, error) {
 	cert, err := tls.LoadX509KeyPair(certPath, keyPath)
 	if err != nil {
 		return nil, fmt.Errorf("failed to load TLS certificate and key: %w", err)
 	}
 
-	config := &tls.Config{Certificates: []tls.Certificate{cert}}
+	clientCACertPool, err := loadCertPool(capath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to load ca certificate: %w", err)
+	}
+
+	config := &tls.Config{
+		Certificates: []tls.Certificate{cert},
+		ClientAuth:   tls.RequireAndVerifyClientCert,
+		ClientCAs:    clientCACertPool,
+	}
 
 	listener, err := tls.Listen("tcp", fmt.Sprintf(":%s", port), config)
 	if err != nil {

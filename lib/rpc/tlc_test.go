@@ -163,10 +163,10 @@ func getCertPaths(t *testing.T) (certPath, keyPath string) {
 
 func TestTlsRpcClientServer(t *testing.T) {
 	certPath, keyPath := getCertPaths(t)
-
+	crtPath := ""
 	port := "7000"
 
-	server, err := NewITlsRpcServer(certPath, keyPath, port)
+	server, err := NewITlsRpcServer(certPath, keyPath, crtPath, port)
 	require.NoError(t, err)
 	defer server.CloseServer()
 
@@ -176,7 +176,7 @@ func TestTlsRpcClientServer(t *testing.T) {
 	go server.Serve()
 	time.Sleep(500 * time.Millisecond) // Give time to start
 
-	client, err := NewITlsRpcClient(certPath, "localhost:"+port, "test-client")
+	client, err := NewITlsRpcClient(crtPath, certPath, keyPath, "localhost:"+port, "test-client")
 	require.NoError(t, err)
 	defer client.CloseClient()
 
@@ -195,9 +195,10 @@ func TestTlsRpcClientServer(t *testing.T) {
 
 func TestServerRejectsInvalidCert(t *testing.T) {
 	certPath, keyPath := getCertPaths(t)
+	crtPath := ""
 	port := "7001"
 
-	server, err := NewITlsRpcServer(certPath, keyPath, port)
+	server, err := NewITlsRpcServer(certPath, keyPath, crtPath, port)
 	require.NoError(t, err)
 	defer server.CloseServer()
 
