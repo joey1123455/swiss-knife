@@ -37,8 +37,8 @@ func GenerateUniqueString(length int) (string, error) {
 	return string(result), nil
 }
 
-func GenerateTimestampedUniqueStringID() (string, error) {
-	randPart, err := GenerateUniqueString(8)
+func GenerateTimestampedUniqueStringID(length int) (string, error) {
+	randPart, err := GenerateUniqueString(length)
 	if err != nil {
 		return "", err
 	}
